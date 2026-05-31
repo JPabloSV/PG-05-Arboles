@@ -16,8 +16,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" style="-fx-background-color: #071130;" stylesheets="@/styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucr.lab.pg05.HelloController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="700.0" prefWidth="1100.0"
+            style="-fx-background-color: #071130;"
+            stylesheets="@/styles.css"
+            xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ucr.lab.pg05.HelloController">
 
+    <!-- ══ HEADER ══ -->
     <top>
         <VBox prefHeight="87.0" prefWidth="600.0" styleClass="header-bar" BorderPane.alignment="CENTER">
             <children>
@@ -31,24 +38,29 @@
                             </children>
                         </VBox>
                     </children>
-                    <padding>
-                        <Insets left="20.0" top="15.0" />
-                    </padding>
+                    <padding><Insets left="20.0" top="15.0" /></padding>
                 </HBox>
             </children>
         </VBox>
     </top>
 
+    <!-- ══ TABS ══ -->
     <center>
-        <TabPane prefHeight="227.0" prefWidth="600.0" styleClass="main-tabs" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <TabPane prefHeight="227.0" prefWidth="600.0" styleClass="main-tabs"
+                 tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
             <tabs>
 
+                <!-- ══════════════════════════════════════════ -->
+                <!--  TAB 1 — Árbol Binario Simple             -->
+                <!-- ══════════════════════════════════════════ -->
                 <Tab text="Árbol Binario Simple">
                     <content>
-                        <SplitPane dividerPositions="0.32" style="-fx-background-color: #071130; -fx-box-border: transparent; -fx-padding: 10;">
+                        <SplitPane dividerPositions="0.32"
+                                   style="-fx-background-color: #071130; -fx-box-border: transparent; -fx-padding: 10;">
                             <items>
-
-                                <VBox maxWidth="400.0" minWidth="280.0" spacing="12.0" style="-fx-background-color: #071130;">
+                                <!-- Panel izquierdo -->
+                                <VBox maxWidth="400.0" minWidth="280.0" spacing="12.0"
+                                      style="-fx-background-color: #071130;">
                                     <children>
                                         <VBox spacing="2.0">
                                             <children>
@@ -62,10 +74,11 @@
                                         <VBox spacing="6.0">
                                             <children>
                                                 <Label style="-fx-text-fill: #ECF0F1;" text="Valor (entero):" />
-                                                <TextField fx:id="txtValueSimple" prefHeight="35.0" promptText="Ej: 42" style="-fx-background-color: #0D1B4B; -fx-text-fill: white; -fx-prompt-text-fill: #5D6D7E; -fx-border-color: #1F3868; -fx-border-radius: 4; -fx-background-radius: 4;" />
+                                                <TextField fx:id="txtValueSimple" prefHeight="35.0" promptText="Ej: 42"
+                                                           style="-fx-background-color: #0D1B4B; -fx-text-fill: white; -fx-prompt-text-fill: #5D6D7E; -fx-border-color: #1F3868; -fx-border-radius: 4; -fx-background-radius: 4;" />
                                                 <Button fx:id="btnInsertSimple" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="btn-accent" text="+ Insertar" />
                                                 <Button fx:id="btnDeleteSimple" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #E74C3C; -fx-text-fill: white;" styleClass="btn-primary" text="✕ Eliminar" />
-                                                <Button fx:id="btnClearSimple" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #2C3E50; -fx-text-fill: #BDC3C7;" styleClass="btn-ghost" text="🗑 Limpiar árbol" />
+                                                <Button fx:id="btnClearSimple"  maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #2C3E50; -fx-text-fill: #BDC3C7;" styleClass="btn-ghost" text="🗑 Limpiar árbol" />
                                             </children>
                                         </VBox>
 
@@ -76,11 +89,16 @@
                                                 <Label style="-fx-text-fill: #ECF0F1;" text="Recorrido:" />
                                                 <HBox spacing="8.0">
                                                     <children>
-                                                        <ComboBox fx:id="cmbTraversalSimple" maxWidth="1.7976931348623157E308" prefHeight="35.0" promptText="PostOrder" style="-fx-background-color: #0D1B4B; -fx-border-color: #1F3868;" HBox.hgrow="ALWAYS" />
+                                                        <ComboBox fx:id="cmbTraversalSimple" maxWidth="1.7976931348623157E308"
+                                                                  prefHeight="35.0" promptText="PostOrder"
+                                                                  style="-fx-background-color: #0D1B4B; -fx-border-color: #1F3868;"
+                                                                  HBox.hgrow="ALWAYS" />
                                                         <Button fx:id="btnPlaySimple" mnemonicParsing="false" prefHeight="35.0" styleClass="btn-accent" text="▶" />
                                                     </children>
                                                 </HBox>
-                                                <TextArea fx:id="txtAreaOutputSimple" editable="false" prefHeight="70.0" style="-fx-control-inner-background: #0D1B4B; -fx-text-fill: #2ECC71; -fx-border-color: #1F3868;" styleClass="steps-list" text="PostOrder: [3, 12, 5, 7, 12, 20, 10]" wrapText="true" />
+                                                <TextArea fx:id="txtAreaOutputSimple" editable="false" prefHeight="70.0"
+                                                          style="-fx-control-inner-background: #0D1B4B; -fx-text-fill: #2ECC71; -fx-border-color: #1F3868;"
+                                                          styleClass="steps-list" wrapText="true" />
                                             </children>
                                         </VBox>
 
@@ -88,8 +106,8 @@
 
                                         <VBox spacing="4.0">
                                             <children>
-                                                <Label fx:id="lblStatsSimple" style="-fx-text-fill: #BDC3C7;" text="Nodos: 7  |  Altura: 2" />
-                                                <Label fx:id="lblEliminadoSimple" style="-fx-text-fill: #2ECC71;" text="🗙 Eliminado: 15" />
+                                                <Label fx:id="lblStatsSimple" style="-fx-text-fill: #BDC3C7;" text="Nodos: 0  |  Altura: 0" />
+                                                <Label fx:id="lblEliminadoSimple" style="-fx-text-fill: #2ECC71;" text="" />
                                             </children>
                                         </VBox>
 
@@ -123,37 +141,174 @@
                                             </children>
                                         </VBox>
                                     </children>
-                                    <padding>
-                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                    </padding>
+                                    <padding><Insets bottom="10.0" left="10.0" right="10.0" top="10.0" /></padding>
                                 </VBox>
 
+                                <!-- Panel derecho — canvas -->
                                 <VBox style="-fx-background-color: #071130;">
                                     <children>
                                         <Label style="-fx-text-fill: #ECF0F1; -fx-padding: 0 0 10 0;" text="Visualización del Árbol" />
-                                        <Pane fx:id="treeCanvasSimple" style="-fx-background-color: #0D1B4B; -fx-border-color: #1F3868; -fx-border-radius: 6; -fx-background-radius: 6;" VBox.vgrow="ALWAYS" />
+                                        <Pane fx:id="treeCanvasSimple"
+                                              style="-fx-background-color: #0D1B4B; -fx-border-color: #1F3868; -fx-border-radius: 6; -fx-background-radius: 6;"
+                                              VBox.vgrow="ALWAYS" />
                                     </children>
-                                    <padding>
-                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                    </padding>
+                                    <padding><Insets bottom="10.0" left="10.0" right="10.0" top="10.0" /></padding>
                                 </VBox>
                             </items>
                         </SplitPane>
                     </content>
                 </Tab>
 
+                <!-- ══════════════════════════════════════════ -->
+                <!--  TAB 2 — BST Búsqueda Binaria            -->
+                <!-- ══════════════════════════════════════════ -->
                 <Tab text="BST — Búsqueda Binaria">
                     <content>
                         <Pane style="-fx-background-color: #071130;" />
                     </content>
                 </Tab>
 
+                <!-- ══════════════════════════════════════════ -->
+                <!--  TAB 3 — AVL Balanceado                   -->
+                <!-- ══════════════════════════════════════════ -->
                 <Tab text="AVL — Balanceado">
                     <content>
-                        <Pane style="-fx-background-color: #071130;" />
+                        <SplitPane dividerPositions="0.29"
+                                   style="-fx-background-color: #071130; -fx-box-border: transparent; -fx-padding: 10;">
+                            <items>
+
+                                <!-- ── Panel izquierdo: controles ── -->
+                                <VBox maxWidth="400.0" minWidth="260.0" spacing="10.0"
+                                      style="-fx-background-color: #071130;">
+                                    <children>
+
+                                        <!-- Títulos -->
+                                        <VBox spacing="2.0">
+                                            <children>
+                                                <Label styleClass="avl-title" text="Árbol AVL" />
+                                                <Label styleClass="avl-subtitle" text="BST auto-balanceado — O(log n) garantizado" />
+                                            </children>
+                                        </VBox>
+
+                                        <Separator style="-fx-opacity: 0.2;" />
+
+                                        <!-- Input + botones -->
+                                        <VBox spacing="6.0">
+                                            <children>
+                                                <Label styleClass="avl-label" text="Valor (entero):" />
+                                                <TextField fx:id="txtValueAVL" prefHeight="35.0" promptText="Ej: 35"
+                                                           styleClass="avl-textfield" />
+                                                <Button fx:id="btnInsertAVL" maxWidth="1.7976931348623157E308"
+                                                        mnemonicParsing="false" styleClass="avl-btn-insert" text="+ Insertar" />
+                                                <Button fx:id="btnSearchAVL" maxWidth="1.7976931348623157E308"
+                                                        mnemonicParsing="false" styleClass="avl-btn-search" text="🔍 Buscar" />
+                                                <Button fx:id="btnDeleteAVL" maxWidth="1.7976931348623157E308"
+                                                        mnemonicParsing="false" styleClass="avl-btn-delete" text="✕ Eliminar" />
+                                                <Button fx:id="btnClearAVL" maxWidth="1.7976931348623157E308"
+                                                        mnemonicParsing="false" styleClass="avl-btn-clear" text="🗑 Limpiar árbol" />
+                                            </children>
+                                        </VBox>
+
+                                        <Separator style="-fx-opacity: 0.2;" />
+
+                                        <!-- Rotación -->
+                                        <VBox spacing="6.0">
+                                            <children>
+                                                <Label styleClass="avl-label" text="Última rotación aplicada:" />
+                                                <Label fx:id="lblRotacionAVL" styleClass="avl-rotation-badge"
+                                                       text="Sin rotación necesaria" />
+                                            </children>
+                                        </VBox>
+
+                                        <Separator style="-fx-opacity: 0.2;" />
+
+                                        <!-- Recorrido -->
+                                        <VBox spacing="6.0">
+                                            <children>
+                                                <Label styleClass="avl-label" text="Recorrido:" />
+                                                <HBox spacing="8.0">
+                                                    <children>
+                                                        <ComboBox fx:id="cmbTraversalAVL" maxWidth="1.7976931348623157E308"
+                                                                  prefHeight="35.0" promptText="InOrder"
+                                                                  styleClass="avl-combobox" HBox.hgrow="ALWAYS" />
+                                                        <Button fx:id="btnPlayAVL" mnemonicParsing="false"
+                                                                prefHeight="35.0" prefWidth="40.0"
+                                                                styleClass="avl-btn-play" text="▶" />
+                                                    </children>
+                                                </HBox>
+                                                <TextArea fx:id="txtAreaOutputAVL" editable="false" prefHeight="70.0"
+                                                          styleClass="avl-output" wrapText="true" />
+                                            </children>
+                                        </VBox>
+
+                                        <Separator style="-fx-opacity: 0.2;" />
+
+                                        <!-- Stats -->
+                                        <VBox spacing="4.0">
+                                            <children>
+                                                <Label fx:id="lblStatsAVL" styleClass="avl-stats"
+                                                       text="Nodos: 0  |  Altura: 0  |  Balanceado: ✔" />
+                                                <Label fx:id="lblStatusAVL" styleClass="avl-status-ok" text="" />
+                                            </children>
+                                        </VBox>
+
+                                        <Separator style="-fx-opacity: 0.2;" />
+
+                                        <!-- Leyenda FE -->
+                                        <VBox spacing="8.0"
+                                              style="-fx-background-color: #0D1B4B; -fx-padding: 10; -fx-background-radius: 6; -fx-border-color: #1F3868; -fx-border-radius: 6;">
+                                            <children>
+                                                <Label style="-fx-text-fill: #ECF0F1; -fx-font-weight: bold;" text="Leyenda FE:" />
+                                                <HBox alignment="CENTER_LEFT" spacing="8.0">
+                                                    <children>
+                                                        <Circle fill="#3498DB" radius="6.0" />
+                                                        <Label style="-fx-text-fill: #ECF0F1;" text="Raíz" />
+                                                    </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" spacing="8.0">
+                                                    <children>
+                                                        <Circle fill="#1ABC9C" radius="6.0" />
+                                                        <Label style="-fx-text-fill: #ECF0F1;" text="FE = 0 (perfecto)" />
+                                                    </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" spacing="8.0">
+                                                    <children>
+                                                        <Circle fill="#2C6B8A" radius="6.0" />
+                                                        <Label style="-fx-text-fill: #ECF0F1;" text="FE = ±1 (aceptable)" />
+                                                    </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" spacing="8.0">
+                                                    <children>
+                                                        <Circle fill="#E74C3C" radius="6.0" />
+                                                        <Label style="-fx-text-fill: #ECF0F1;" text="FE = ±2 (rotar ⚠)" />
+                                                    </children>
+                                                </HBox>
+                                            </children>
+                                        </VBox>
+
+                                    </children>
+                                    <padding><Insets bottom="10.0" left="10.0" right="10.0" top="10.0" /></padding>
+                                </VBox>
+
+                                <!-- ── Panel derecho: árbol AVL ── -->
+                                <VBox style="-fx-background-color: #071130;">
+                                    <children>
+                                        <Label style="-fx-text-fill: #ECF0F1; -fx-padding: 0 0 10 0;"
+                                               text="Visualización del Árbol AVL" />
+                                        <Pane fx:id="avlTreePane"
+                                              style="-fx-background-color: #0D1B4B; -fx-border-color: #1F3868; -fx-border-radius: 6; -fx-background-radius: 6;"
+                                              VBox.vgrow="ALWAYS" />
+                                    </children>
+                                    <padding><Insets bottom="10.0" left="10.0" right="10.0" top="10.0" /></padding>
+                                </VBox>
+
+                            </items>
+                        </SplitPane>
                     </content>
                 </Tab>
+
             </tabs>
         </TabPane>
     </center>
+
 </BorderPane>
