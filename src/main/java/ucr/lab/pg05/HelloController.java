@@ -127,10 +127,10 @@ public class HelloController {
             while (!queue.isEmpty()) {
                 Node current = queue.poll();
                 if (current.value == targetValue) targetNode = current;
-                if (current.left != null) { deepestParent = current; queue.add(current.left); }
-                if (current.right != null) { deepestParent = current; queue.add(current.right); }
-                deepestNode = current;
-            }
+            if (current.left != null) { deepestParent = current; queue.add(current.left); }
+            if (current.right != null) { deepestParent = current; queue.add(current.right); }
+            deepestNode = current;
+        }
             if (targetNode != null) {
                 lblEliminadoSimple.setText("✕ Eliminado: " + targetValue);
                 if (root == deepestNode) { root = null; }
