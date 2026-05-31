@@ -3,7 +3,7 @@
    Estilos con tema institucional UCR (azul marino + ámbar)
    ══════════════════════════════════════════════════════════════════════════ */
 
-/* ── Variables de color (usamos -fx en JavaFX CSS) ────────────────────── */
+
 .root {
     -ucr-navy:      #0D1B4B;
     -ucr-blue:      #1F3868;
@@ -19,12 +19,11 @@
     -fx-font-family: "Calibri";
 }
 
-/* ── Root ──────────────────────────────────────────────────────────────── */
+
 .root-pane {
     -fx-background-color: -ucr-bg;
 }
 
-/* ── Header ────────────────────────────────────────────────────────────── */
 .header-bar {
     -fx-background-color: -ucr-navy;
     -fx-padding: 12 20 12 20;
@@ -404,4 +403,148 @@
 .bench-table .table-cell {
     -fx-alignment: CENTER;
     -fx-font-size: 14px;
+}
+
+.avl-side-panel {
+    -fx-background-color: #071130;
+    -fx-padding: 10 10 10 10;
+}
+
+.avl-title {
+    -fx-text-fill: #3498DB;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+}
+
+.avl-subtitle {
+    -fx-text-fill: #7F8C8D;
+    -fx-font-style: italic;
+    -fx-font-size: 11px;
+}
+
+.avl-label {
+    -fx-text-fill: #ECF0F1;
+    -fx-font-size: 13px;
+}
+
+.avl-textfield {
+    -fx-background-color: #0D1B4B;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #5D6D7E;
+    -fx-border-color: #1F3868;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-pref-height: 35px;
+}
+
+.avl-btn-insert {
+    -fx-background-color: #00BCD4;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+    -fx-pref-height: 35px;
+}
+.avl-btn-insert:hover {
+    -fx-background-color: #0097A7;
+}
+
+.avl-btn-search {
+    -fx-background-color: #7B2FBE;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+    -fx-pref-height: 35px;
+}
+.avl-btn-search:hover {
+    -fx-background-color: #6A1FA8;
+}
+
+.avl-btn-delete {
+    -fx-background-color: #E74C3C;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+    -fx-pref-height: 35px;
+}
+.avl-btn-delete:hover {
+    -fx-background-color: #C0392B;
+}
+
+.avl-btn-clear {
+    -fx-background-color: #2C3E50;
+    -fx-text-fill: #BDC3C7;
+    -fx-font-size: 12px;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+    -fx-pref-height: 32px;
+}
+.avl-btn-clear:hover {
+    -fx-background-color: #3D5166;
+}
+
+.avl-rotation-badge {
+    -fx-background-color: #1A1A1A;
+    -fx-text-fill: #E8A020;
+    -fx-font-size: 12px;
+    -fx-padding: 6 10 6 10;
+    -fx-background-radius: 4;
+}
+
+.avl-combobox {
+    -fx-background-color: #0D1B4B;
+    -fx-border-color: #00BCD4;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-text-fill: white;
+    -fx-pref-height: 35px;
+}
+.avl-combobox .list-cell {
+    -fx-text-fill: white;
+    -fx-background-color: #0D1B4B;
+}
+
+.avl-btn-play {
+    -fx-background-color: #00BCD4;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+    -fx-pref-height: 35px;
+    -fx-pref-width: 40px;
+}
+
+.avl-output {
+    -fx-control-inner-background: #0D1B4B;
+    -fx-text-fill: #2ECC71;
+    -fx-border-color: #1F3868;
+    -fx-font-family: "Consolas", "Courier New", monospace;
+    -fx-font-size: 12px;
+}
+
+.avl-stats {
+    -fx-text-fill: #BDC3C7;
+    -fx-font-size: 12px;
+}
+
+.avl-status-ok {
+    -fx-text-fill: #2ECC71;
+    -fx-font-size: 12px;
+}
+
+.avl-legend-box {
+    -fx-background-color: #0D1B4B;
+    -fx-padding: 10;
+    -fx-background-radius: 6;
+    -fx-border-color: #1F3868;
+    -fx-border-radius: 6;
+}
+
+.avl-canvas-area {
+    -fx-background-color: #071130;
 }
