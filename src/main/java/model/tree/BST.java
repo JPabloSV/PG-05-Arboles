@@ -7,10 +7,11 @@ public class BST<T extends Comparable<T>> extends BTree<T> {
         if (isEmpty()) throw new TreeException("Binary Search Tree is empty");
         return binarySearch(this.root, element);
     }
+
     private boolean binarySearch(BTreeNode<T> node, T element) {
         if (node == null) return false;
         if (equals(node.data, element)) return true;
-        else if (compareElements(element,node.data)<0)
+        else if (compareElements(element, node.data) < 0)
             return binarySearch(node.left, element);
         else return binarySearch(node.right, element);
     }
@@ -37,7 +38,7 @@ public class BST<T extends Comparable<T>> extends BTree<T> {
     }
 
     //interno
-    public BTreeNode<T> remove (BTreeNode<T> node, T element) {
+    public BTreeNode<T> remove(BTreeNode<T> node, T element) {
         if (node != null) {
             if (compareElements(element, node.data) < 0)
                 node.left = remove(node.left, element);
@@ -71,8 +72,9 @@ public class BST<T extends Comparable<T>> extends BTree<T> {
         return min(root);
     }
 
-    private T min(BTreeNode<T> node) {
-        if (node.left != null) return min(node.right);
+    protected T min(BTreeNode<T> node) {
+        if (node == null) return null;
+        if (node.left != null) return min(node.left);
         return node.data;
     }
 
@@ -82,9 +84,10 @@ public class BST<T extends Comparable<T>> extends BTree<T> {
         return max(root);
     }
 
-    private T max(BTreeNode<T> node) {
+    protected T max(BTreeNode<T> node) {
+        if (node == null) return null;
         if (node.right != null) return max(node.right);
-            return node.data;
+        return node.data;
     }
 
     @Override
