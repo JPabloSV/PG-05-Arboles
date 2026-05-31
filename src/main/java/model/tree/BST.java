@@ -76,7 +76,6 @@ public class BST<T extends Comparable<T>> extends BTree<T> {
         if (node == null) return null;
         if (node.left != null) return min(node.left);
         return node.data;
-
     }
 
     @Override
