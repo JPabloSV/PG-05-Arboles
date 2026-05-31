@@ -11,6 +11,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import model.tree.AVL;
+import model.tree.BST;
 import model.tree.BTreeNode;
 import model.tree.TreeException;
 
@@ -39,7 +40,22 @@ public class HelloController {
         Node(int value) { this.value = value; }
     }
     private Node root = null;
-
+    //campos BST
+    @FXML private TextField txtValueBST;
+    @FXML private Button btnInsertBST;
+    @FXML private Button btnSearchBST;
+    @FXML private Button btnDeleteBST;
+    @FXML private Button btnClearBST;
+    @FXML private ComboBox<String> cmbTraversalBST;
+    @FXML private Button btnPlayBST;
+    @FXML private TextArea txtAreaOutputBST;
+    @FXML private Label lblStatsBST;
+    @FXML private Label lblStatusBST;
+    @FXML private Pane bstTreePane;
+    private BST<Integer> bst = new BST<>();
+    // Nodos resaltados durante la búsqueda BST (camino + encontrado)
+    private java.util.Set<Integer> bstSearchPath = new java.util.HashSet<>();
+    private int bstFoundNode = -1;
 
     @FXML private TextField txtValueAVL;
     @FXML private Button btnInsertAVL;
@@ -58,6 +74,20 @@ public class HelloController {
 
     @FXML
     public void initialize() {
+
+        // ── Tab BST ──────────────────────────────────────
+        cmbTraversalBST.setItems(FXCollections.observableArrayList(
+                "InOrder", "PreOrder", "PostOrder", "BFS"
+        ));
+        cmbTraversalBST.setValue("InOrder");
+        lblStatusBST.setText("");
+        lblStatsBST.setText("Nodos: 0  |  Altura: 0  |  BST válido: ");
+
+        btnInsertBST.setOnAction(e -> handleInsertBST());
+        btnSearchBST.setOnAction(e -> handleSearchBST());
+        btnDeleteBST.setOnAction(e -> handleDeleteBST());
+        btnClearBST.setOnAction(e -> handleClearBST());
+        btnPlayBST.setOnAction(e -> handleTraversalBST());
 
         // ── Tab Simple ──────────────────────────────────
         cmbTraversalSimple.setItems(FXCollections.observableArrayList(
@@ -80,7 +110,7 @@ public class HelloController {
 
         lblRotacionAVL.setText("Sin rotación necesaria");
         lblStatusAVL.setText("");
-        lblStatsAVL.setText("Nodos: 0  |  Altura: 0  |  Balanceado: ✔");
+        lblStatsAVL.setText("Nodos: 0  |  Altura: 0  |  Balanceado: ");
 
         btnInsertAVL.setOnAction(e -> handleInsertAVL());
         btnDeleteAVL.setOnAction(e -> handleDeleteAVL());
@@ -454,5 +484,172 @@ public class HelloController {
         }
 
         return "Sin rotación necesaria";
+    }
+
+    //bst
+    private void handleInsertBST() {
+        String input = txtValueBST.getText().trim();
+        if (input.isEmpty()) return;
+        try {
+            int value = Integer.parseInt(input);
+            bst.add(value);
+            bstSearchPath.clear();
+            bstFoundNode = -1;
+            txtValueBST.clear();
+            lblStatusBST.setText("✔ Insertado: " + value);
+            updateUIBST();
+        } catch (NumberFormatException ex) {
+            lblStatusBST.setText("Error: ingrese un número entero válido.");
+        }
+    }
+
+    private void handleSearchBST() {
+        String input = txtValueBST.getText().trim();
+        if (input.isEmpty()) return;
+        try {
+            int value = Integer.parseInt(input);
+            if (bst.isEmpty()) { lblStatusBST.setText("El árbol está vacío."); return; }
+
+            // Reconstruir el camino de búsqueda
+            bstSearchPath.clear();
+            bstFoundNode = -1;
+            boolean found = buildSearchPath(bst.root, value);
+            if (found) {
+                bstFoundNode = value;
+                lblStatusBST.setText("✔ Encontrado: " + value);
+            } else {
+                lblStatusBST.setText("✘ No encontrado: " + value);
+            }
+            drawBSTTree();
+        } catch (NumberFormatException ex) {
+            lblStatusBST.setText("Error: ingrese un número entero válido.");
+        }
+    }
+
+    /**
+     * Recorre el BST siguiendo la lógica de búsqueda binaria y marca
+     * todos los nodos visitados en bstSearchPath.
+     */
+    private boolean buildSearchPath(BTreeNode<Integer> node, int target) {
+        if (node == null) return false;
+        bstSearchPath.add(node.data);
+        if (node.data == target) return true;
+        if (target < node.data) return buildSearchPath(node.left, target);
+        return buildSearchPath(node.right, target);
+    }
+
+    private void handleDeleteBST() {
+        String input = txtValueBST.getText().trim();
+        if (input.isEmpty()) return;
+        try {
+            int value = Integer.parseInt(input);
+            if (bst.isEmpty()) { lblStatusBST.setText("El árbol está vacío."); return; }
+            try {
+                bst.remove(value);
+                bstSearchPath.clear();
+                bstFoundNode = -1;
+                txtValueBST.clear();
+                lblStatusBST.setText("✔ Eliminado: " + value);
+                updateUIBST();
+            } catch (TreeException ex) {
+                lblStatusBST.setText("✘ No encontrado: " + value);
+            }
+        } catch (NumberFormatException ex) {
+            lblStatusBST.setText("Error: ingrese un número entero válido.");
+        }
+    }
+
+    private void handleClearBST() {
+        bst.clear();
+        bstSearchPath.clear();
+        bstFoundNode = -1;
+        bstTreePane.getChildren().clear();
+        lblStatsBST.setText("Nodos: 0  |  Altura: 0  |  BST válido: ✔");
+        lblStatusBST.setText("Árbol limpio");
+        txtAreaOutputBST.setText("");
+    }
+
+    private void handleTraversalBST() {
+        if (bst.isEmpty()) { txtAreaOutputBST.setText("El árbol está vacío."); return; }
+        String type = cmbTraversalBST.getValue();
+        if (type == null) { txtAreaOutputBST.setText("Seleccione un tipo de recorrido."); return; }
+        try {
+            String result;
+            if (type.contains("BFS")) {
+                result = "BFS (Por Niveles): " + bfsBST(bst.root);
+            } else if (type.contains("Pre")) {
+                result = "PreOrder: [" + bst.preOrder().trim() + "]";
+            } else if (type.contains("Post")) {
+                result = "PostOrder: [" + bst.postOrder().trim() + "]";
+            } else {
+                result = "InOrder: [" + bst.inOrder().trim() + "]";
+            }
+            txtAreaOutputBST.setText(result);
+        } catch (TreeException ex) {
+            txtAreaOutputBST.setText("Error al recorrer: " + ex.getMessage());
+        }
+    }
+
+    private String bfsBST(BTreeNode<Integer> root) {
+        if (root == null) return "[]";
+        List<Integer> result = new ArrayList<>();
+        Queue<BTreeNode<Integer>> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            BTreeNode<Integer> current = queue.poll();
+            result.add(current.data);
+            if (current.left != null) queue.add(current.left);
+            if (current.right != null) queue.add(current.right);
+        }
+        return result.toString();
+    }
+
+    private void updateUIBST() {
+        updateStatsBST();
+        drawBSTTree();
+    }
+
+    private void updateStatsBST() {
+        try {
+            int nodos  = bst.isEmpty() ? 0 : bst.size();
+            int altura = bst.isEmpty() ? 0 : bst.height();
+            lblStatsBST.setText("Nodos: " + nodos + "  |  Altura: " + altura + "  |  BST válido: ✔");
+        } catch (TreeException ex) {
+            lblStatsBST.setText("Nodos: 0  |  Altura: 0  |  BST válido: ✔");
+        }
+    }
+
+    private void drawBSTTree() {
+        bstTreePane.getChildren().clear();
+        if (bst.isEmpty()) return;
+        double startX = bstTreePane.getWidth() > 0 ? bstTreePane.getWidth() / 2 : 380;
+        double hGap   = bstTreePane.getWidth() > 0 ? bstTreePane.getWidth() / 4 : 190;
+        drawBSTNode(bst.root, startX, 50, hGap, 80);
+    }
+
+    private void drawBSTNode(BTreeNode<Integer> node, double x, double y,
+                             double hGap, double vGap) {
+        if (node == null) return;
+
+        if (node.left != null) {
+            double cx = x - hGap, cy = y + vGap;
+            addLine(bstTreePane, x, y, cx, cy);
+            drawBSTNode(node.left, cx, cy, hGap / 2, vGap);
+        }
+        if (node.right != null) {
+            double cx = x + hGap, cy = y + vGap;
+            addLine(bstTreePane, x, y, cx, cy);
+            drawBSTNode(node.right, cx, cy, hGap / 2, vGap);
+        }
+
+        // Color según estado
+        Color color;
+        if (node == bst.root)                        color = Color.web("#3498DB"); // azul — raíz
+        else if (node.data == bstFoundNode)          color = Color.web("#27AE60"); // verde — encontrado
+        else if (bstSearchPath.contains(node.data))  color = Color.web("#E8A020"); // ámbar — camino
+        else if (node.left == null && node.right == null) color = Color.web("#1F3868"); // gris oscuro — hoja
+        else                                         color = Color.web("#2C5F8A"); // azul gris — interno
+
+        addCircleWithLabel(bstTreePane, x, y, 22, color, String.valueOf(node.data), null);
     }
 }
